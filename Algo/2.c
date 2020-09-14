@@ -37,7 +37,8 @@ void initialiser(t_carte jeu[])
 {
     int k = 0;
     int j = 0;
-    for (int i = 0; i < 4; i++)
+    int i;
+    for (i = 0; i < 4; i++)
     {
         for (k = 0; k < 13; k++)
         {
@@ -85,19 +86,20 @@ void trier(t_carte main[])
     int i;
     while (!fini)
     {
+        fini = 1;
         for (i = 1; i < TAILLE_MAIN; i++)
         {
             if (main[i].couleur > main[i + 1].couleur)
             {
                 t_carte save = main[i + 1];
-                main[i + 1] = main[i + 1];
+                main[i + 1] = main[i];
                 main[i] = save;
                 fini = 0;
             }
             else if ((main[i].couleur == main[i + 1].couleur) && main[i].hauteur > main[i + 1].hauteur)
             {
                 t_carte save = main[i + 1];
-                main[i + 1] = main[i + 1];
+                main[i + 1] = main[i];
                 main[i] = save;
                 fini = 0;
             }
@@ -144,6 +146,9 @@ void afficher_carte(t_carte carte)
         break;
     case roi:
         printf("Roi de ");
+        break;
+    case as:
+        printf("As de ");
         break;
     }
 
