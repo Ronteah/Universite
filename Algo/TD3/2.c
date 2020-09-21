@@ -38,24 +38,19 @@ void chercher_chemin(int laby[N][M], int xa, int ya, int xd, int yd)
 
 }
 
-void marquer_chemin(int laby[N][M], int xa, int ya, int xd, int yd)
+void marquer_chemin(int laby[N][M], int xa, int ya)
 {
-    int i, j;
+    int x=xa;
+    int y=ya;
     int indice = laby[xa][ya];
 
-    while(laby[xd][yd]==1){
-        for(i=0 ; i<N; i++)
-        {
-            for(j=0; j<M; j++){
-                if(laby[i][j]==indice)
-                {
-                    if(est_vide(laby, i+1, j)==1) laby[i+1][j]=-2;
-                    if(est_vide(laby, i-1, j)==1) laby[i-1][j]=-2;
-                    if(est_vide(laby, i, j+1)==1) laby[i][j+1]=-2;
-                    if(est_vide(laby, i, j-1)==1) laby[i][j-1]=-2;
-                }
-            }
-        }
+    while(indice>1){
+        laby[x][y]=-2;
+        if(valides(x-1,y) && laby[x-1][y]==indice-1) x=x-1;
+        else if(valides(x+1,y) && laby[x+1][y]==indice-1) x=x+1;
+        else if(valides(x,y-1) && laby[x][y-1]==indice-1) y=y-1;
+        else if(valides(x,y+1) && laby[x][y+1]==indice-1) y=y+1;
+
         indice--;
     }
 }
