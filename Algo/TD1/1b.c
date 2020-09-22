@@ -9,7 +9,7 @@ int main()
 
     printf("Donner le nom du fichier : ");
     scanf("%s", nom_fich);
-    if(fichier==NULL) printf("Fichier inexistant")
+    if(fichier==NULL) printf("Fichier inexistant");
     else{
 
         fichier=fopen(nom_fich, "r");
