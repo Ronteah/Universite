@@ -1,0 +1,19 @@
+P(Z)
+
+Arité trop grande à droite 
+
+carre(X)/Y (= P(carre(X)))
+
+(carre(5), age(Z))
+
+Z/X W/YP (= P(X, Y))
+
+P(titi, tom)
+
+Y/nina (=P(nina, nina))
+
+Impossible car X ne peut avoir qu'une seule valeur
+
+X/Y, X/Z 
+
+P(tom, tom)

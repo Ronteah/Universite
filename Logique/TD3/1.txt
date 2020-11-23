@@ -1,0 +1,6 @@
+rectangle(quadri(A,B,C,D)):- parallelog(quadri(A,B,C,D)), perpend(segment(B,C), segment(C,B)).
+    
+losange(quadri(A,B,C,D)):- parallelog(quadri(A,B,C,D)), meme_long(segment(B,C), segment(C,B)).
+
+carré(quadri(A,B,C,D)):- rectangle(quadri(A,B,C,D)), losange(quadri(A,B,C,D)).
+

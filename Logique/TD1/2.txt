@@ -1,0 +1,20 @@
+a.
+
+souris(Jerry), chat(Tom)
+chat(X) => prédateur(X)
+souris(X) = rusé(X)
+chat(X), souris(Y) => poursuit(X, Y)
+prédateur(X), poursuit(X, Jerry) => échappe(X, Jerry)
+poursuit(X, Y), rusé(Y) => échoue(X) 
+
+
+
+b.
+
+souris(jerry)           chat(tom)
+                                    {tom/X}
+{tom/X,jerry/Y}             prédateur(tom)
+
+        poursuit(tom,jerry)
+                                {tom/X}
+                    échappe(jerry,tom)

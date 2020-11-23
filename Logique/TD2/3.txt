@@ -1,0 +1,15 @@
+entree(crudites,6).
+entree(taboule,8).
+entree(avocat,5).
+
+plat(couscous,12).
+plat(risoto,10).
+plat(lasagnes,12).
+
+dessert(glace,6).
+dessert(fruits,5).
+dessert(gateau,8).
+
+menu(P,E,Z) :- entree(E,P1), plat(P,P2), Z is P1+P2.
+menu(P,D,Z) :- plat(P,P1), dessert(D,P2), Z is P1+P2.
+

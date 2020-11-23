@@ -1,0 +1,71 @@
+1. 
+CREATE TABLE pers(id_pers serial primary key not null, nom varchar(20) not null, prenom varchar(20));
+
+CREATE TABLE prof(id_pers integer primary key references pers not null, date_arr date);
+
+CREATE TABLE promo(id_promo serial primary key not null, niveau_promo varchar(2) CHECK (niveau_promo SIMILAR TO '(L|M|D)(1|2|3)'), nom_filiere varchar(20), nom_ufr varchar(20));
+
+CREATE TABLE scolarite(id_promo integer references promo, annee integer CHECK(annee between 2000 and 2150), id_etudiant integer references pers not null, moyenne float, primary key(annee, id_etudiant));
+
+CREATE TABLE module(id_module serial primary key not null, nom_module varchar(20) not null, dsc_module varchar(200));
+
+CREATE TABLE enseignement(id_promo integer not null, id_prof integer references pers not null, annee integer CHECK(annee between 2000 and 2150), id_module integer references module, primary key(id_promo, id_prof, annee));
+
+2. 
+ALTER TABLE scolarite DROP CONSTRAINT scolarite_pkey;
+
+ALTER TABLE scolarite ADD CONSTRAINT scolarite_pkey primary key(id_promo, annee, id_etudiant);
+
+ALTER TABLE enseignement DROP CONSTRAINT enseignement_pkey;
+
+ALTER TABLE enseignement ADD CONSTRAINT enseignement_pkey primary key(id_promo, id_prof, annee, id_module);
+
+3.
+ALTER TABLE enseignement RENAME TO ens;
+
+4.
+ALTER TABLE scolarite RENAME COLUMN moyenne TO moy;
+
+5.
+\i Documents/L2-INFO/BDD/script_inser.sql
+
+6.
+a.
+INSERT INTO scolarite values ((SELECT id_promo FROM promo WHERE niveau_promo='L2' and nom_filiere='Info'),2007,(SELECT id_pers FROM pers WHERE nom='Cooper' and prenom='Sheldon'), 19.79);
+
+b.
+INSERT INTO scolarite (id_promo, annee, id_etudiant) values ((SELECT id_promo FROM promo WHERE niveau_promo='M2' and nom_filiere='Info'),2016,(SELECT id_pers FROM pers WHERE nom='Hofstadter' and prenom='Leonard'));
+
+7.
+a.
+UPDATE prof SET date_arr='2009-09-01' WHERE id_pers=(SELECT id_pers FROM pers WHERE nom='Wolowitz' and prenom='Howard');
+
+b.
+UPDATE prof SET date_arr='2011-09-01' WHERE id_pers=(SELECT id_pers FROM pers WHERE nom='Cooper' and prenom='Sheldon');
+
+8.
+SELECT CURRENT_TIMESTAMP;
+
+9.
+SELECT nom,prenom FROM pers WHERE id_pers IN (SELECT id_etudiant FROM scolarite);
+
+10.
+SELECT nom,prenom FROM pers WHERE id_pers NOT IN ((SELECT id_etudiant FROM scolarite) UNION (SELECT id_pers FROM prof));
+
+11.
+SELECT nom,prenom FROM pers WHERE id_pers=(SELECT id_pers FROM prof WHERE date_arr=(SELECT MIN(date_arr) FROM prof));
+
+12.
+SELECT niveau_promo || ' ' || nom_filiere AS "Promo 2007 Cooper" FROM promo WHERE id_promo=(SELECT id_promo FROM scolarite WHERE id_etudiant=(SELECT id_pers FROM pers WHERE nom='Cooper' and prenom='Sheldon'));
+
+13.
+SELECT avg(moy) FROM scolarite WHERE id_promo=(SELECT id_promo FROM promo WHERE niveau_promo='L2' and nom_filiere='Info') and annee=2018;
+
+14.
+SELECT COUNT(DISTINCT(id_module)) FROM ens WHERE annee=2018 and id_prof=(SELECT id_pers FROM pers WHERE nom='Cooper' and prenom='Sheldon');
+
+15.
+SELECT nom_module || ' - ' || id_pers FROM module JOIN ens ON module.id_module=ens.id_module JOIN pers ON ens.id_pers=pers.id_pers;
+
+
+

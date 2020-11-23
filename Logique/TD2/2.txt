@@ -1,0 +1,7 @@
+max(A,B,B) :- B >= A.
+max(A,B,A) :- A > B.
+
+min(A,B,B) :- B <= A.
+min(A,B,A) :- A < B.
+
+max(A,B,C,R) :- max(A,B,D), max(D,C,R).

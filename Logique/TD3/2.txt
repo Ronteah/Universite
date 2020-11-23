@@ -1,0 +1,19 @@
+voisin(nina). /* Nina, Zoé, Arsène et Tom sont les voisins */
+voisin(zoe).
+voisin(arsene).
+voisin(tom).
+temoin(nina, piscine). /* Nina a été vue par un témoin à la piscine à l’heure du vol */
+temoin(zoe,villa). /* Zoé a été vue par un témoin à la villa à l’heure du vol */
+brun(arsene). /* Arsène a les cheveux bruns */
+blond(tom). /* Tom a les cheveux blonds */
+collectionneur(arsene). /* Arsène est collectionneur de tableaux */
+collectionneur(nina). 
+
+alibi(A):- \+temoin(A,villa), temoin(A,_).
+
+suspect(A):- collectionneur(A), \+alibi(A).
+
+innocent(A):- alibi(A).
+innocent(A):- blond(A).
+
+incertain(A):- \+innocent(A), \+suspect(A).

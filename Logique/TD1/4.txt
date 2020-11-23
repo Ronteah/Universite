@@ -1,0 +1,22 @@
+a.
+
+dom(felix)
+
+dom(X) => maître(X,Y)           !dom(X) V maître(X,Y)
+
+sauv(X) => !maître(X,Y)         !sauv(X) V !maître(X,Y)
+
+
+
+b.
+
+dom(X)   dom(felix)   {X/felix}
+
+!dom(felix) V maître(felix,Y)
+!=
+!sauv(felix) V !maître(felix,Y)
+
+
+sauv        !sauv V maître
+    maître
+                 dom V !maître 

@@ -1,0 +1,48 @@
+a.
+
+A => M
+E /\ !P => A 
+P => M /\ C 
+C /\ F => Ve 
+H => F 
+
+
+b.
+
+!A V M 
+(!E V P) V A
+
+    !P V M 
+    !P V C
+
+(!C V !F) V Ve 
+!H V F 
+
+
+c.
+
+1. !C   !P V C   !E V P V A   E   !A 
+      !P    
+            !E V A 
+                         A 
+                               _|_
+
+2. Impossible
+
+3. !M    !A V M   !E V P V A   !P V M   !M   E 
+      !A 
+              !E V P 
+                          !E V M 
+                                    !E 
+                                         _|_
+
+
+
+E   !M 
+
+!M    !P V M   (!E V P) V A   E     !A V M   !M
+   !P 
+           !E V A 
+                             A      
+                                 M 
+                                          _|_
